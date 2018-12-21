@@ -5,9 +5,12 @@
         </ActionBar>
         
        <FlexboxLayout >
-            <ListView for="item in beers" @itemTap="onItemTap">
+            <ListView for="item in beers">
                 <v-template>
-                    <Label :text="item.beer.beer_name" />
+                    <StackLayout class="card" >
+                        <Image :src="item.beer.beer_label" stretch="contain" />
+                        <Label :text="item.beer.beer_name" />
+                    </StackLayout>
                 </v-template>
             </ListView>
         </FlexboxLayout>

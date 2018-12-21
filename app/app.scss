@@ -7,3 +7,11 @@
 
 // Import common styles
 @import 'app-common';
+
+.card {
+	border-radius: 4;
+	margin: 12;
+    padding: 10;
+	background-color: #E3E9F8;
+    color: #131636;
+}
