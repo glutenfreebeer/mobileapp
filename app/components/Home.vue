@@ -3,25 +3,39 @@
         <ActionBar class="action-bar">
             <Label class="action-bar-title" text="Home"></Label>
         </ActionBar>
-
-        <GridLayout>
-            <Label class="info" horizontalAlignment="center" verticalAlignment="center">
-                <FormattedString>
-                    <Span class="fa" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                    <Span>Ciao mondo!</span>
-                </FormattedString>
-            </Label>
-        </GridLayout>
+        
+       <FlexboxLayout >
+            <ListView for="item in beers" @itemTap="onItemTap">
+                <v-template>
+                    <Label :text="item.beer.beer_name" />
+                </v-template>
+            </ListView>
+        </FlexboxLayout>
     </Page>
 </template>
 
 <script>
+    import ApiService from '../services/ApiService.js';
+
     export default {
+        data(){
+            return {
+                api_service: '',
+                beers:''
+            }
+        },
         computed: {
             message() {
                 return "Blank {N}-Vue app";
             }
+        },
+        mounted(){
+            this.api_service = new ApiService();
+            this.api_service.getAll().then((response)=>{
+                console.log(response.data);  
+                this.beers = response.data
+            })
+            
         }
     };
 </script>
