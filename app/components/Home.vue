@@ -17,30 +17,29 @@
     </Page>
 </template>
 
-<script>
-    import ApiService from '../services/ApiService.js';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import ApiService from '../services/ApiService';
 
-    export default {
-        data(){
-            return {
-                api_service: '',
-                beers:''
-            }
-        },
-        computed: {
-            message() {
-                return "Blank {N}-Vue app";
-            }
-        },
-        mounted(){
-            this.api_service = new ApiService();
-            this.api_service.getAll().then((response)=>{
-                console.log(response.data);  
-                this.beers = response.data
-            })
-            
-        }
-    };
+@Component
+export default class Home extends Vue {
+
+    apiService?: ApiService;
+
+    beers: any[] = [];
+
+    get message() {
+        return "Blank {N}-Vue app";
+    }
+
+    mounted() {
+        this.apiService = new ApiService();
+        this.apiService.getAll().then((response: any)=>{
+            console.log(response.data);  
+            this.beers = response.data
+        });
+    }
+}
 </script>
 
 <style scoped lang="scss">

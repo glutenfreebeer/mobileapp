@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-class ApiService{
-  constructor(){
+class ApiService {
+
+  service: any;
+
+  constructor() {
     let service = axios.create({
       baseURL: 'http://192.168.1.131:3000/api/',
     });
